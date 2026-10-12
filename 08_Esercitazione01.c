@@ -6,6 +6,7 @@
 
 void visualizzaMenu();
 int verificaPalindroma(char* str);
+void concatenaStringhe(char* str1,char* str2);
 
 int main(void)
 {
@@ -13,6 +14,10 @@ int main(void)
     scelta = (int*)malloc(sizeof(int));
     //Es 1
     char *str;
+    //Es 2
+    char *str1;
+    char *str2;
+
    
     do{
         visualizzaMenu();
@@ -37,8 +42,24 @@ int main(void)
             }
             else
                 printf("La stringa %s NON e' palindroma\n", str);
+            free(str);
             break;
-            case 2:
+            case 6:
+            /*Date due stringhe in input, contarle e stampare il risultato*/
+            str1 = (char*)malloc(sizeof(char) * MAX);
+            str2 = (char*)malloc(sizeof(char) * MAX);
+            if(str1 != NULL && str2 != NULL)
+            {
+                printf("Stringa 1 > ");
+                gets(str1);
+                printf("Stringa 2 > ");
+                gets(str2);
+            str1 = realloc(str1, sizeof(char)*(strlen(str1)) + 1);
+            str2 = realloc(str1, sizeof(char)*(strlen(str2)) + 1);
+            concatenaStringhe(str1,str2);
+            }
+            free(str1);
+            free(str2);
             break;
             case 0:
                 printf("Arrivederci....\n");
@@ -58,7 +79,7 @@ int main(void)
 void visualizzaMenu()
 {
     printf("\nESERCITAZIONE - PUNTATORI\n");
-    printf("1. Verifica se una stringa è palindroma\n");
+    printf("1. Verifica se una stringa e' palindroma\n");
     printf("2. Inverti una stringa\n");
     printf("3. Conta vocali e consonanti di una stringa\n");
     printf("4. Cerca un valore in un vettore\n");
@@ -82,7 +103,12 @@ int verificaPalindroma(char* str)
         inizio++;
         fine--;
     }
-    if(*inizio==*fine)
+    if(*inizio == *fine)
         return 1;
     return 0;
+}
+
+void concatenaStringhe(char* str1,char* str2)
+{
+    str1=realloc(str1, sizeof(char)* (strlen(str1)+ strlen(str2)+1));
 }
